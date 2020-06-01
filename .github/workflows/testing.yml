@@ -39,6 +39,7 @@ jobs:
   bash-macos:
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v1
       - name: Download Issues with end limit
         id: normalIssuesWithLimit
         run: bash ./wireframe-downloader.sh -l 28
