@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+# all scripts are baased on the testing scripts for MagPiDownloader by @rubemlrm
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  powershell:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Download Issues With end limit
+        id: normalIssuesWithLimit
+        shell: pwsh
+        run: ./wireframe-downloader.ps1 -l 3
+      - name: Download Issues with start and end limit
+        id: normalIssuesWithRange
+        shell: pwsh
+        run: ./wireframe-downloader.ps1 -f 37 -l 38
+
+  bash-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Download Issues with end limit
+        id: normalIssuesWithRange
+        run: bash ./wireframe-downloader.sh -l 28
+      - name: Download Issues with start and end limit
+        id: normalIssuesWithRange
+        run: bash ./wireframe-downloader.sh -f 34 -l 35
+  bash-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Download Issues with end limit
+        id: normalIssuesWithRange
+        run: bash ./wireframe-downloader.sh -l 28
+      - name: Download Issues with start and end limit
+        id: normalIssuesWithRange
+        run: bash ./wireframe-downloader.sh -f 34 -l 35
