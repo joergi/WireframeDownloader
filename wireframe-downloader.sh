@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 # ------------------------------------------------------------------
 # [Author] joergi - https://github.com/joergi/WireframeDownloader
 #          downloader for all Wireframe magzine issues
@@ -11,7 +11,7 @@
 # VERSION=0.1.0
 # USAGE="Usage: bash wireframe-downloader.sh [-f firstissue] [-l lastissue]"
 
-BASEDIR=`dirname $0`/..
+BASEDIR=`dirname $0`
 OUTDIR=$BASEDIR/issues
 
 if [ ! -d "$OUTDIR" ]; then
@@ -20,6 +20,7 @@ fi
 
 i=1
 file="$BASEDIR/regular-issues.txt";
+
 issues=$(cat "$file");
 
 	while :
@@ -36,7 +37,7 @@ issues=$(cat "$file");
 
 	while [ $i -le $issues ]
 	do
-		printf -v page_url https://wireframe.raspberrypi.org/issues/%02d/pdf" $i
+		printf -v page_url "https://wireframe.raspberrypi.org/issues/%02d/pdf" $i
 		pdf_url=`curl -sf $page_url | grep c-link | sed 's/^.*href=\"//' | sed 's/\?.*$//'`
 		wget -N $pdf_url -P $OUTDIR
 		i=$(( i+1 ))
