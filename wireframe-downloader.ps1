@@ -7,8 +7,8 @@
 #          this script is under GNU GENERAL PUBLIC LICENSE 3
 # ------------------------------------------------------------------
 
-# VERSION=0.1.o
-# USAGE="Usage: bash wireframe-downloader.sh [-f firstissue] [-l lastissue]"
+# VERSION=0.1.2
+# USAGE="Usage: sh wireframe-downloader.sh [-f firstissue] [-l lastissue]"
 
 
 Param(
@@ -18,8 +18,8 @@ Param(
 
 # control variables
 $i = 1
-$baseDir = ($PSScriptRoot )
-$issues = Get-Content "$baseDir\regular-issues.txt" -First 1
+$baseDir = (Split-Path -Path $PSScriptRoot -Parent)
+$issues = Get-Content "$baseDir\issues.txt" -First 1
 $baseUrl = "https://wireframe.raspberrypi.org/issues/"
 $web = New-Object system.net.webclient
 $errorCount = 0
@@ -43,15 +43,15 @@ do {
 
     $tempCounter = if ($i -le 9) { "{0:00}" -f $i }  Else { $i }
 
-    $fileReponse = ((Invoke-WebRequest -UseBasicParsing "$baseUrl$tempCounter/pdf").Links | Where-Object { $_.href -like "http*" } | Where class -eq c-link)
+    $fileReponse = ((Invoke-WebRequest -UseBasicParsing "$baseUrl$tempCounter/pdf").Links | Where-Object { $_.href -like "http*" } | Where-Object class -eq c-link)
     if ($fileReponse) {
         try {
             $web.DownloadFile($fileReponse.href, "$baseDir\issues\" + $fileReponse.download)
-            Write-Host "Downloaded from " + $fileReponse.href
+            Write-Verbose -Message "Downloaded from  $fileReponse.href"
         }
         Catch {
-            Write-Host $_.Exception | format-list -force
-            Write-Host "Ocorred an error trying download " + $fileReponse.download
+            Write-Verbose -Message $_.Exception | format-list -force
+            Write-Verbose -Message "Ocorred an error trying download $fileReponse.download"
             $errorCount++
         }
     }
