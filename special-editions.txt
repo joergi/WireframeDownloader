@@ -1,0 +1,5 @@
+# Code the Classics – Volume 1
+https://wireframe.raspberrypi.org/books/code-the-classics1/pdf
+
+# Build Your Own First-Person Shooter in Unity
+https://wireframe.raspberrypi.org/books/unity-fps/pdf
