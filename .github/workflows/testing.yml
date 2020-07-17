@@ -36,6 +36,9 @@ jobs:
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         run: bash ./wireframe-downloader.sh -f 34 -l 35
+      - name: Download all special ediations
+        id: downloadSpecial-Editions
+        run: bash ./wireframe-books-downloader.sh
   bash-macos:
     runs-on: macos-latest
     steps:
@@ -46,3 +49,6 @@ jobs:
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         run: bash ./wireframe-downloader.sh -f 34 -l 35
+      - name: Download all special ediations
+        id: downloadSpecial-Editions
+        run: bash ./wireframe-books-downloader.sh
