@@ -35,11 +35,11 @@ issues=$(cat "$file");
 		shift
 	done
 
-	while [ $i -le $issues ]
+	while [ "$i" -le "$issues" ]
 	do
 		printf -v page_url "https://wireframe.raspberrypi.org/issues/%02d/pdf" "$i"
-		pdf_url=`curl -sf "$page_url" | grep \"c-link\" | sed 's/^.*href=\"//' | sed 's/\?.*$//'`
-		wget -N $pdf_url -P "$OUTDIR"
+		pdf_url=$(curl -sf "$page_url" | grep \"c-link\" | sed 's/^.*href=\"//' | sed 's/\?.*$//')
+		wget -N "$pdf_url" -P "$OUTDIR"
 		i=$(( i+1 ))
 	done
 
