@@ -15,7 +15,7 @@ BASEDIR=$(dirname "$0")
 OUTDIR=$BASEDIR/issues
 
 if [ ! -d "$OUTDIR" ]; then
- mkdir $OUTDIR
+ mkdir "$OUTDIR"
 fi
 
 i=1
