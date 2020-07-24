@@ -20,17 +20,17 @@ jobs:
       - name: Download Issues With end limit
         id: normalIssuesWithLimit
         shell: pwsh
-        run: ./wireframe-downloader.ps1 -l 3
+        run: ./wireframe-downloader.ps1 -l 2
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         shell: pwsh
-        run: ./wireframe-downloader.ps1 -f 37 -l 38
+        run: ./wireframe-downloader.ps1 -f 39 -l 40
         # https://github.com/marketplace/actions/file-existence
       - name: "Check file existence Windows"
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/wireframe-issue-3.pdf, issues/wireframe-issue-37.pdf"
+          files: "issues/wireframe-issue-2.pdf, issues/wireframe-issue-40.pdf"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
@@ -44,15 +44,15 @@ jobs:
       - uses: actions/checkout@v1
       - name: Download Issues with end limit
         id: normalIssuesWithLimit
-        run: bash ./wireframe-downloader.sh -l 28
+        run: bash ./wireframe-downloader.sh -l 2
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
-        run: bash ./wireframe-downloader.sh -f 34 -l 35
-      - name: "Check file existence Windows"
+        run: bash ./wireframe-downloader.sh -f 39 -l 40
+      - name: "Check file existence Linux"
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/Wireframe03.pdf, issues/Wireframe37.pdf"
+          files: "issues/Wireframe02.pdf, issues/Wireframe40.pdf"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
@@ -66,15 +66,15 @@ jobs:
       - uses: actions/checkout@v1
       - name: Download Issues with end limit
         id: normalIssuesWithLimit
-        run: bash ./wireframe-downloader.sh -l 3
+        run: bash ./wireframe-downloader.sh -l 2
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
-        run: bash ./wireframe-downloader.sh -f 37 -l 38
-      - name: "Check file existence Windows"
+        run: bash ./wireframe-downloader.sh -f 39 -l 40
+      - name: "Check file existence mac"
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/Wireframe03.pdf, issues/Wireframe37.pdf"
+          files: "issues/Wireframe02.pdf, issues/Wireframe40.pdf"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
