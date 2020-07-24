@@ -33,7 +33,7 @@ jobs:
           files: "issues/wireframe-issue-2.pdf, issues/wireframe-issue-40.pdf"
           allow_failure: false
       - name: lslah
-        run: ls -lah issues/
+        run: Get-ChildItem issues/
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
