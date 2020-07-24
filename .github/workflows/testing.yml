@@ -33,7 +33,7 @@ jobs:
           files: "issues/wireframe-issue-3.pdf, issues/wireframe-issue-37.pdf"
           allow_failure: false
       - name: lslah
-        run: ls -lah
+        run: ls -lah issues/
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
@@ -52,10 +52,10 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/wireframe-issue-3.pdf, issues/wireframe-issue-37.pdf"
+          files: "issues/Wireframe03.pdf, issues/Wireframe37.pdf"
           allow_failure: false
       - name: lslah
-        run: ls -lah
+        run: ls -lah issues/
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
@@ -74,10 +74,10 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/wireframe-issue-3.pdf, issues/wireframe-issue-37.pdf"
+          files: "issues/Wireframe03.pdf, issues/Wireframe37.pdf"
           allow_failure: false
       - name: lslah
-        run: ls -lah
+        run: ls -lah issues/
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
