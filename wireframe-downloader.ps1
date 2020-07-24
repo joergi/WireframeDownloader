@@ -18,7 +18,9 @@ Param(
 
 # control variables
 $i = 1
-$baseDir = (Split-Path -Path $PSScriptRoot -Parent)
+
+
+$baseDir = ($PSScriptRoot)
 $issues = Get-Content "$baseDir\regular-issues.txt" -First 1
 $baseUrl = "https://wireframe.raspberrypi.org/issues/"
 $web = New-Object system.net.webclient
