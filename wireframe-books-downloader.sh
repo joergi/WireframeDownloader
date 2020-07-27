@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 # ------------------------------------------------------------------
 # [Author] joergi - https://github.com/joergi/WireframeDownloader
 #          downloader for all Wireframe magzine issues and books
