@@ -48,6 +48,9 @@ jobs:
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         run: bash ./wireframe-downloader.sh -f 39 -l 40
+      - name: Download all special ediations
+        id: downloadSpecial-Editions
+        run: bash ./wireframe-books-downloader.sh
       - name: "Check file existence Linux"
         id: check_files
         uses: andstor/file-existence-action@v1
@@ -59,7 +62,6 @@ jobs:
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
-        
   bash-macos:
     runs-on: macos-latest
     steps:
@@ -70,6 +72,9 @@ jobs:
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         run: bash ./wireframe-downloader.sh -f 39 -l 40
+      - name: Download all special ediations
+        id: downloadSpecial-Editions
+        run: bash ./wireframe-books-downloader.sh
       - name: "Check file existence mac"
         id: check_files
         uses: andstor/file-existence-action@v1
@@ -81,4 +86,3 @@ jobs:
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
-        
