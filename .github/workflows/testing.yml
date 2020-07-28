@@ -55,7 +55,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf"
+          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf, special-issues/Code_the_Classics-book.pdf, special-issues/Wireframe_BYOFPS"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
@@ -79,7 +79,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf"
+          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf, special-issues/Code_the_Classics-book.pdf, special-issues/Wireframe_BYOFPS"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
