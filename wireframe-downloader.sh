@@ -18,29 +18,15 @@ if [ ! -d "$OUTDIR" ]; then
  mkdir "$OUTDIR"
 fi
 
-i=1
-file="$BASEDIR/regular-issues.txt";
+downloadUrl="https://wireframe.raspberrypi.org/issues/%02d/pdf"
 
-issues=$(cat "$file");
+file="$BASEDIR/sources-for-download/regular-issues.txt";
+recentIssue=$(cat "$file");
 
-	while :
-	do
-		case "$1" in
-		-f) shift; i="$1";;
-		-l) shift; issues="$1";;
-		--) shift; break;;
-		-*) usage "bad argument $1";;
-		*) break;;
-		esac
-		shift
-	done
-
-	while [ "$i" -le "$issues" ]
-	do
-		printf -v page_url "https://wireframe.raspberrypi.org/issues/%02d/pdf" "$i"
-		pdf_url=$(curl -sf "$page_url" | grep \"c-link\" | sed 's/^.*href=\"//' | sed 's/\?.*$//')
-		wget -N "$pdf_url" -P "$OUTDIR"
-		i=$(( i+1 ))
-	done
+# workaround for a known limitation in bash 3.x: http://lists.gnu.org/archive/html/bug-bash/2006-01/msg00018.html
+# stackoverflow: https://stackoverflow.com/questions/32596123/why-source-command-doesnt-work-with-process-substitution-in-bash-3-2/32596626#32596626
+# shellcheck disable=SC1091
+source /dev/stdin <<<"$(curl -s https://raw.githubusercontent.com/joergi/downloader/main/linux_mac/downloader.sh)" "$downloadUrl" "$OUTDIR" "$recentIssue" "$@"
 
 exit 0
+

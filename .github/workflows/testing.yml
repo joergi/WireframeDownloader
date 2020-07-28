@@ -4,12 +4,12 @@
 name: CI
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# events but only for the main branch
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -48,18 +48,20 @@ jobs:
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         run: bash ./wireframe-downloader.sh -f 39 -l 40
+      - name: Download all special ediations
+        id: downloadSpecial-Editions
+        run: bash ./wireframe-books-downloader.sh
       - name: "Check file existence Linux"
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf"
+          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf, special-issues/Code_the_Classics-book.pdf, special-issues/Wireframe_BYOFPS.pdf"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
-        
   bash-macos:
     runs-on: macos-latest
     steps:
@@ -70,15 +72,17 @@ jobs:
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
         run: bash ./wireframe-downloader.sh -f 39 -l 40
+      - name: Download all special ediations
+        id: downloadSpecial-Editions
+        run: bash ./wireframe-books-downloader.sh
       - name: "Check file existence mac"
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf"
+          files: "issues/WF_02_Digital_Edition_v3.pdf, issues/Wireframe40.pdf, special-issues/Code_the_Classics-book.pdf, special-issues/Wireframe_BYOFPS.pdf"
           allow_failure: false
       - name: lslah
         run: ls -lah issues/
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
-        
