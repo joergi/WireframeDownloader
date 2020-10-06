@@ -11,9 +11,9 @@
 # USAGE="Usage: sh wireframe-downloader.sh [-f firstissue] [-l lastissue]"
 
 
-Param(
+param (
     [string]$f,
-    [string]$l
+    [string]$l 
 )
 
 # control variables
