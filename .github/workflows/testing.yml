@@ -47,7 +47,7 @@ jobs:
         run: bash ./wireframe-downloader.sh -l 2
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
-        run: bash ./wireframe-downloader.sh -f 41 -l 43
+        run: bash ./wireframe-downloader.sh -f 41 -l 44
       - name: Download all special ediations
         id: downloadSpecial-Editions
         run: bash ./wireframe-books-downloader.sh
@@ -71,7 +71,7 @@ jobs:
         run: bash ./wireframe-downloader.sh -l 2
       - name: Download Issues with start and end limit
         id: normalIssuesWithRange
-        run: bash ./wireframe-downloader.sh -f 41 -l 43
+        run: bash ./wireframe-downloader.sh -f 41 -l 44
       - name: Download all special ediations
         id: downloadSpecial-Editions
         run: bash ./wireframe-books-downloader.sh
