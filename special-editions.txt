@@ -1,2 +1,3 @@
 https://wireframe.raspberrypi.org/books/code-the-classics1/pdf
 https://wireframe.raspberrypi.org/books/unity-fps/pdf
+https://wireframe.raspberrypi.org/books/help-my-computer-is-broken/pdf
