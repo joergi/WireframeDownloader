@@ -18,7 +18,7 @@ if [ ! -d "$OUTDIR" ]; then
  mkdir "$OUTDIR"
 fi
 
-downloadUrl="https://wireframe.raspberrypi.org/issues/%02d/pdf"
+downloadUrl="https://wireframe.raspberrypi.com/issues/%02d/pdf"
 
 file="$BASEDIR/sources-for-download/regular-issues.txt";
 recentIssue=$(cat "$file");
