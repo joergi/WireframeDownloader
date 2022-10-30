@@ -33,12 +33,12 @@ jobs:
         run: ./wireframe-downloader.ps1 -l 2
 
       - name: Download Issues with end limit
-        id: normalIssuesWithRange
+        id: downloadIssueWithEndRange
         shell: pwsh
         run: ./wireframe-downloader.ps1 -f ${{ env.ISSUE_MINUS_ONE }}
 
       - name: Download Issues with start and end limit
-        id: normalIssuesWithRange
+        id: normalIssuesWithStanrtAndEndRange
         shell: pwsh
         run: ./wireframe-downloader.ps1 -f ${{ env.ISSUE_MINUS_SIX }} -l ${{ env.ISSUE_MINUS_FIVE }}
 
@@ -62,10 +62,10 @@ jobs:
         id: normalIssuesWithLimit
         run: bash ./wireframe-downloader.sh -l 2
       - name: Download Issues with start limit
-        id: normalIssuesWithRange
+        id: normalIssuesWithStartRange
         run: bash ./wireframe-downloader.sh -f ${{ env.ISSUE_MINUS_ONE }}
       - name: Download Issues with start and end limit
-        id: normalIssuesWithRange
+        id: normalIssuesWithStartAndEndRange
         run: bash ./wireframe-downloader.sh -f ${{ env.ISSUE_MINUS_SIX }} -l ${{ env.ISSUE_MINUS_FIVE }}
       - name: Download all special ediations
         id: downloadSpecial-Editions
@@ -89,10 +89,10 @@ jobs:
         id: normalIssuesWithLimit
         run: bash ./wireframe-downloader.sh -l 2
       - name: Download Issues with start limit
-        id: normalIssuesWithRange
+        id: normalIssuesWithStartRange
         run: bash ./wireframe-downloader.sh  -f ${{ env.ISSUE_MINUS_ONE }}
       - name: Download Issues with start and end limit
-        id: normalIssuesWithRange
+        id: normalIssuesWithStartAndEndRange
         run: bash ./wireframe-downloader.sh  -f ${{ env.ISSUE_MINUS_SIX }} -l ${{ env.ISSUE_MINUS_FIVE }}
       - name: Download all special ediations
         id: downloadSpecial-Editions
