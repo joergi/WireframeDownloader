@@ -20,7 +20,7 @@ fi
 
 downloadUrl="https://wireframe.raspberrypi.com/issues/%02d/pdf"
 
-file="$BASEDIR/sources-for-download/regular-issues.txt";
+file="$BASEDIR/regular-issues.txt";
 recentIssue=$(cat "$file");
 
 # workaround for a known limitation in bash 3.x: http://lists.gnu.org/archive/html/bug-bash/2006-01/msg00018.html
