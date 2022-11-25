@@ -1,7 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-# all scripts are baased on the testing scripts for MagPiDownloader by @rubemlrm
-
-name: CI
+name: Testing
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch
