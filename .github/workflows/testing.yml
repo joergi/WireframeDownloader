@@ -50,6 +50,7 @@ jobs:
           allow_failure: false
       - name: lslah
         run: ls -lah
+        shell: bash
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
