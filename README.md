@@ -1,5 +1,5 @@
 # WireframeDownloader
 
-![CI](https://github.com/joergi/WireframeDownloader/workflows/CI/badge.svg) [![HitCount](http://hits.dwyl.com/joergi/WireframeDownloader.svg)](http://hits.dwyl.com/joergi/WireframeDownloader)
+![Testing](https://github.com/joergi/WireframeDownloader/workflows/Testing/badge.svg)
 
 Downloader for the Wireframe Magazine
