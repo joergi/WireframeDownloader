@@ -26,7 +26,7 @@ jobs:
           echo "ISSUE_MINUS_ONE=$((${{ steps.read_recent.outputs.text }}-1))" >> $GITHUB_ENV
           echo "ISSUE_MINUS_FIVE=$((${{ steps.read_recent.outputs.text }}-5))" >> $GITHUB_ENV
           echo "ISSUE_MINUS_SIX=$((${{ steps.read_recent.outputs.text }}-6))" >> $GITHUB_ENV
-
+        shell: bash
       - name: Download Issues With end limit
         id: normalIssuesWithLimit
         shell: pwsh
@@ -46,7 +46,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: "issues/wireframe-issue-2.pdf, issues/wireframe-issue-${{ env.ISSUE_MINUS_SIX }}.pdf,  issues/wireframe-issue-${{ env.ISSUE_MINUS_FIVE }}.pdf,  issues/wireframe-issue-${{ env.ISSUE_MINUS_ONE }}.pdf,  issues/wireframe-issue-${{ env.ISSUE_NUMBER }}.pdf"
+          files: "../issues/wireframe-issue-1.pdf, ../issues/wireframe-issue-2.pdf, ../issues/wireframe-issue-${{ env.ISSUE_MINUS_SIX }}.pdf,  ../issues/wireframe-issue-${{ env.ISSUE_MINUS_FIVE }}.pdf,  ../issues/wireframe-issue-${{ env.ISSUE_MINUS_ONE }}.pdf,  ../issues/wireframe-issue-${{ env.ISSUE_NUMBER }}.pdf"
           allow_failure: false
       - name: lslah
         run: Get-ChildItem issues/

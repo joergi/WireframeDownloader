@@ -1,64 +1,60 @@
-#!/bin/bash
-# ------------------------------------------------------------------
-# [Author] Original script for MagpiDownloader from @rubemlrm - https://github.com/joergi/MagPiDownloader
-#          adapted by @joergi for Wireframe Downloader: https://github.com/joergi/WireframeDownloader
-#          they are downloadable for free under https://wireframe.raspberrypi.org/issues
-#          or you can buy the paper issues under: https://store.rpipress.cc/collections/wireframe
-#          this script is under GNU GENERAL PUBLIC LICENSE 3
-# ------------------------------------------------------------------
+# USAGE="Usage: wireframe-downloader.ps1 [-f firstissue] [-l lastissue]"
 
-# VERSION=0.1.2
-# USAGE="Usage: sh wireframe-downloader.sh [-f firstissue] [-l lastissue]"
+<#
+.SYNOPSIS
+    Downloader for all Wireframe issues
+.DESCRIPTION
+     they are downloadable for free under: https://wireframe.raspberrypi.com/issues
+     or you can buy the paper issues under: https://store.rpipress.cc/collections/wireframe
+     this script is under GNU GENERAL PUBLIC LICENSE
 
-
-param (
-    [string]$f,
-    [string]$l 
+.NOTES
+    This script is under GNU GENERAL PUBLIC LICENSE
+    Orignal author: Rubemlrm - https://github.com/Rubemlrm
+    The new rewritten code is copied from The Magpi Windows code by [Author](https://github.com/Jaykul)
+    Script is part of https://github.com/joergi/Wireframe-Downloader
+#>
+    [CmdletBinding()]
+param(
+    [string]$FirstIssue = "1",
+    [string]$LastIssue
 )
+[uri]$baseUrl = "https://wireframe.raspberrypi.com/issues/"
 
 # control variables
-$i = 1
+$baseDir = Split-Path -Path $PSScriptRoot -Parent
+if (!$LastIssue) {
+    $LastIssue = Get-Content "$baseDir\WireframeDownloader\regular-issues.txt" -First 1
+}
 
-
-$baseDir = ($PSScriptRoot)
-$issues = Get-Content "$baseDir\regular-issues.txt" -First 1
-$baseUrl = "https://wireframe.raspberrypi.org/issues/"
-$web = New-Object system.net.webclient
-$errorCount = 0
+$downloadDir = Join-Path $baseDir "issues"
 
 # Check if directory dont exist and try create
-if ( -Not (Test-Path -Path "$baseDir\issues" ) ) {
-    New-Item -ItemType directory -Path "$baseDir\issues"
+if (!(Test-Path -Path $downloadDir)) {
+    $null = New-Item -ItemType Directory -Path $downloadDir -ErrorAction Stop
 }
 
-
-if ($f) {
-    $i = [int]$f
-}
-
-if ($l) {
-    $issues = [int]$l
-}
-
-do {
-    #start scrapping directory and download files
-
-    $tempCounter = if ($i -le 9) { "{0:00}" -f $i }  Else { $i }
-
-    $fileReponse = ((Invoke-WebRequest -UseBasicParsing "$baseUrl$tempCounter/pdf").Links | Where-Object { $_.href -like "http*" } | Where-Object class -eq c-link)
-    if ($fileReponse) {
+$errorCount = 0
+foreach($issue in $FirstIssue..$LastIssue) {
+    $uri = [uri]::new($baseurl,"{0:00}/pdf" -f $issue)
+    Write-Verbose -Message "Downloading $uri"
+    if (($link = (Invoke-WebRequest -UseBasicParsing $uri).Links.Where{ $_.class -eq "c-link" }.href)) {
+        $uri = [uri]::new($baseurl, $link)
         try {
-            $web.DownloadFile($fileReponse.href, "$baseDir\issues\" + $fileReponse.download)
-            Write-Verbose -Message "Downloaded from  $fileReponse.href"
-        }
-        Catch {
-            Write-Verbose -Message $_.Exception | format-list -force
-            Write-Verbose -Message "Ocorred an error trying download $fileReponse.download"
+            Write-Information "Downloading $uri"
+            Write-Output "Downloading $uri"
+            Invoke-WebRequest $uri -OutFile (Join-Path $downloadDir $uri.Segments[-1]) -ErrorAction Stop
+            Write-Verbose -Message "Downloaded $uri"
+        } catch {
+            Write-Warning "Failed downloading $uri"
+            Get-Error | Out-String | Write-Verbose -Verbose
             $errorCount++
         }
+    } else {
+        Write-Warning "Failed to find link for issue $issue"
+        $errorCount++
     }
-    $i++
-} While ($i -le $issues)
+}
 
 if ($errorCount -gt 0) {
     exit 1
