@@ -49,7 +49,7 @@ jobs:
           files: "../issues/wireframe-issue-1.pdf, ../issues/wireframe-issue-2.pdf, ../issues/wireframe-issue-${{ env.ISSUE_MINUS_SIX }}.pdf,  ../issues/wireframe-issue-${{ env.ISSUE_MINUS_FIVE }}.pdf,  ../issues/wireframe-issue-${{ env.ISSUE_MINUS_ONE }}.pdf,  ../issues/wireframe-issue-${{ env.ISSUE_NUMBER }}.pdf"
           allow_failure: false
       - name: lslah
-        run: ls -lah ../issues
+        run: ls -lah
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'false'
         run: exit 1        
